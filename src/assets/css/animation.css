@@ -1,0 +1,20 @@
+@keyframes spin {
+    to { transform: rotateX(90deg) rotateZ(360deg); }
+}
+
+@keyframes spin-reverse {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+@keyframes hit {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(-30deg); }
+}
+@keyframes shake {
+    0% { transform: rotate(0deg) }
+    25% { transform:rotate(-6deg) }
+    50% { transform: rotate(-12deg)}
+    75% { transform:rotate(6deg) }
+    100% { transform: rotate(12deg)}
+}
