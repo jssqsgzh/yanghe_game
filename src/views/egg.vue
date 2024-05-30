@@ -15,7 +15,7 @@
                 <p class="line"></p>
                 <div class="flex_column_center" v-if="awardCode == 'game_0603_win1'">
                     <p class="tip">凭中奖页面在洋河导购员处领取</p>
-                    <p>{{ voucherCode }}sssss</p>
+                    <p>{{ voucherCode }}</p>
                 </div>
                 <div v-else class="flex_column_center award-code">
                     <Vue3NextQrcode :text="code_url" size="130" :whiteMargin="false" />
