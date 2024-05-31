@@ -4,7 +4,7 @@
         <div class="scan-box">
             <Vue3NextQrcode :text="REDIRECT_URL" :size="isPc ? '200' : '170'" colorDark="#0169B6" :whiteMargin="false" />
         </div>
-        <p class="text_18_bold scan-text">微信扫码参与抽奖</p>
+        <p class="text_18_bold scan-text">{{ browser == 'wechat' ? '微信' : '支付宝'}}扫码参与抽奖</p>
     </div>
 </template>
 
@@ -13,6 +13,7 @@ import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 import { Vue3NextQrcode } from 'vue3-next-qrcode'
 import {isPcWindow} from '@/assets/utils/index'
 const isPc = isPcWindow()
+const browser = localStorage.getItem('browser')
 const REDIRECT_URL = 'https://www.baidu.com/'
 const APPID = ''
 // 微信
