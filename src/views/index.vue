@@ -23,7 +23,7 @@
 <style lang='scss' scoped>
 .main{background: url($basic_static+'bg.png');height: 100vh;background-size: 100% 100%;position: relative;
     .logo-img{width: 110px;height: auto;position: absolute; top: 20px; left: 20px;}
-    .title-img{width: 220px;height: auto;position:absolute;top: 86px;left: 50%;transform: translateX(-50%);}
+    .title-img{width: 220px;height: auto;position:absolute;top: 66px;left: 50%;transform: translateX(-50%);}
     .wine-img{width: 210px;height: auto;position:absolute;bottom: 0;left: 50%; transform: translateX(-50%);}
 }
 .main-pc{

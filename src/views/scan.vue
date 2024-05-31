@@ -24,8 +24,10 @@ onMounted(() => {});
 </script>
 <style lang="scss" scoped>
 .scan-main { position: absolute; top: 210px; left: 50%; transform: translateX(-50%);
-  .scan-text { color: #fff;margin-top: 10px;}
-  .scan-box { border-radius: 8px; padding: 8px; width: 100%;background: #fff;display: inline-block;width: auto;margin-top: 10px;;}
+    .scan-text { color: #fff;margin-top: 10px;}
+    .scan-box { border-radius: 8px; width: 100%;background: #fff;display: inline-block;width: auto;margin-top: 10px;
+        ::v-deep img{border-radius: 8px;}
+    }
 }
 .qrcode{color: red;}
 .scan-pc{top: 300px!important;
