@@ -9,16 +9,6 @@ const routes = [
       redirect:'/egg',
       children:[
         {
-            path: '/login',
-            name: '/login',
-            component: () => import('../views/login.vue'),
-            meta: {
-                title: '首页',
-                keepAlive: false,
-                isUseCache: false
-            },
-        },
-        {
             path: '/scan',
             name: '/index',
             component: () => import('../views/scan.vue'),

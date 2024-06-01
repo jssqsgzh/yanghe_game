@@ -5,9 +5,9 @@
                 <h2>恭喜中了洋河礼品</h2>
                 <h3 v-if="awardCode == 'game_0603_win1'">抽纸一盒</h3>
                 <p class="desc">（奖品数量有限，送完即止）</p>
-                <img v-if="awardCode == 'game_0603_win1'" class="paper-img" src="../assets/img/paper.png" alt="" />
-                <img v-else-if="awardCode == 'game_0603_win2'" class="award-img" src="../assets/img/award1.png" alt="" />
-                <img v-else-if="awardCode == 'game_0603_win3'" class="award-img" src="../assets/img/award2.png" alt="" />
+                <img v-if="awardCode == 'game_0603_win1'" class="paper-img" :src="basic_static + 'image/paper.png'" alt="" />
+                <img v-else-if="awardCode == 'game_0603_win2'" class="award-img" :src="basic_static + 'image/award1.png'" alt="" />
+                <img v-else-if="awardCode == 'game_0603_win3'" class="award-img" :src="basic_static + 'image/award2.png'" alt="" />
                 <p class="line"></p>
                 <div class="flex_column_center" v-if="awardCode == 'game_0603_win1'">
                     <p class="tip">凭中奖页面在洋河导购员处领取</p>
@@ -18,7 +18,7 @@
                     <p>{{ browser == "wechat" ? "微信" : "支付宝" }}扫码或长按识别领取</p>
                 </div>
             </div>
-            <img class="close-img" src="../assets/img/close.png" @click="cancel" alt="" />
+            <img class="close-img" :src="basic_static + 'image/close.png'" @click="cancel" alt="" />
         </van-dialog>
         <div class="egg-main">
             <div class="num-box">
@@ -28,28 +28,27 @@
                 <el-carousel-item v-for="item in eggList" :key="item.id">
                     <div class="flex_column_center egg-box">
                         <div class="break" v-if="item.boom">
-                            <img src="@/assets/img/egg-broken1.png" alt="" class="break-top" v-show="item.step == 1" />
-                            <img src="@/assets/img/egg-broken2.png" alt="" class="break-top" v-show="item.step == 2" />
-                            <img src="@/assets/img/egg-broken3.png" alt="" class="break-top" v-show="item.step == 3" />
-                            <img src="@/assets/img/egg-broken4.png" alt="" class="break-top" v-show="item.step == 4" />
-                            <img src="@/assets/img/egg-broken5.png" alt="" class="break-top" v-show="item.step == 5" />
-                            <img src="@/assets/img/egg-broken6.png" alt="" class="break-top" v-show="item.step == 6" />
-                            <img src="@/assets/img/egg-broken7.png" alt="" class="break-top" v-show="item.step == 7" />
-                            <img src="@/assets/img/egg-broken8.png" alt="" class="break-top" v-show="step == 8" />
-                            <!-- <img src="@/assets/img/egg-broken9.png" alt="" class="break-top break-top9" v-show="item.step == 9" /> -->
-                            <img src="@/assets/img/egg-broken-half2.png" alt="" class="break-bottom" v-show="item.boom" :style="item.step > 8 ? 'transform:translateY(1.6rem)' : ''" id="break-bottom" />
+                            <img :src="basic_static + 'image/egg-broken1.png'" alt="" class="break-top" v-show="item.step == 1" />
+                            <img :src="basic_static + 'image/egg-broken2.png'" alt="" class="break-top" v-show="item.step == 2" />
+                            <img :src="basic_static + 'image/egg-broken3.png'" alt="" class="break-top" v-show="item.step == 3" />
+                            <img :src="basic_static + 'image/egg-broken4.png'" alt="" class="break-top" v-show="item.step == 4" />
+                            <img :src="basic_static + 'image/egg-broken5.png'" alt="" class="break-top" v-show="item.step == 5" />
+                            <img :src="basic_static + 'image/egg-broken6.png'" alt="" class="break-top" v-show="item.step == 6" />
+                            <img :src="basic_static + 'image/egg-broken7.png'" alt="" class="break-top" v-show="item.step == 7" />
+                            <img :src="basic_static + 'image/egg-broken8.png'" alt="" class="break-top" v-show="step == 8" />
+                            <img :src="basic_static + 'image/egg-broken-half2.png'" alt="" class="break-bottom" v-show="item.boom" :style="item.step > 8 ? 'transform:translateY(2rem)' : ''" id="break-bottom" />
                         </div>
-                        <img src="@/assets/img/dan.png" alt="" ref="eggTop" :class="['egg-top', index == 1 ? '' : 'eddAnmiation']" v-show="!item.boom" @click.stop="boom(item)" />
-                        <img v-if="item.hammer" src="../assets/img/hammer.png" alt="" class="hammer" />
+                        <img :src="basic_static + 'image/dan.png'" alt="" ref="eggTop" :class="['egg-top', index == 1 ? '' : 'eddAnmiation']" v-show="!item.boom" @click.stop="boom(item)" />
+                        <img v-if="item.hammer" :src="basic_static + 'image/hammer.png'" alt="" class="hammer" />
                     </div>
                 </el-carousel-item>
             </el-carousel>
-            <el-carousel :interval="111111500" type="card" style="transform: translateY(-8rem)" >
+            <el-carousel :interval="111111500" type="card" style="transform: translateY(-5.6rem)" >
                 <el-carousel-item v-for="item in 3" :key="item">
                     <div class="flex_column_center egg-box">
-                        <img src="@/assets/img/dizuo_01.png" v-if="item == 1" alt="" class="egg-bottom" />
-                        <img src="@/assets/img/dizuo_02.png" v-if="item == 2" alt="" class="egg-bottom" style="transform: translateY(-2rem)" />
-                        <img src="@/assets/img/dizuo_03.png" v-if="item == 3" alt="" class="egg-bottom" style="transform: translateY(-2rem)" />
+                        <img :src="basic_static + 'image/dizuo_01.png'" v-if="item == 1" alt="" class="egg-bottom" />
+                        <img :src="basic_static + 'image/dizuo_02.png'" v-if="item == 2" alt="" class="egg-bottom" style="transform: translateY(-3.8rem)" />
+                        <img :src="basic_static + 'image/dizuo_03.png'" v-if="item == 3" alt="" class="egg-bottom" style="transform: translateY(-4.8rem);width:240px" />
                     </div>
                 </el-carousel-item>
             </el-carousel>
@@ -68,6 +67,10 @@ import { award, enter } from "@/api/base";
 import { Vue3NextQrcode } from "vue3-next-qrcode";
 import { useRouter, useRoute } from "vue-router";
 import { showMessage } from "@/assets/utils";
+import { storeToRefs } from "pinia";
+import useBaseStore from "@/store/base";
+const store = useBaseStore()
+const {domain_static, basic_static} = storeToRefs(store)
 const router = useRouter();
 const route = useRoute();
 const show = ref(false);
@@ -106,6 +109,29 @@ var num = ref(null);
 const userId = localStorage.getItem("userId");
 const browser = localStorage.getItem("browser");
 
+const init = () => {
+    eggList.value = [
+        {
+            id: 1,
+            boom: false,
+            step: 0,
+            hammer: false,
+        },
+        {
+            id: 2,
+            boom: false,
+            step: 0,
+            hammer: false,
+        },
+        {
+            id: 3,
+            boom: false, //是否敲击
+            step: 0, //控制碎蛋
+            hammer: false, //控制锤子
+        },
+    ];
+}
+
 const enterGame = async () => {
     let res = await enter({ userId: userId });
     if (res) {
@@ -121,14 +147,10 @@ const enterGame = async () => {
 };
 
 const boom = (item) => {
-    if (index.value == 1) {
-        //   boomList.value.push(item.id);
-        // eggList.value.forEach((citem) => {
-        //   citem.boom = true;
-        // });
-        // item.boom = false;
-        index.value = 2;
-    } else {
+    // if (index.value == 1) {
+     
+    //     index.value = 2;
+    // } else {
         let audio = new Audio(require("../assets/audio/win.mp3"));
         audio.onload = () => {
             audio.play();
@@ -166,7 +188,7 @@ const boom = (item) => {
                 }
             }, 250);
         }, 500);
-    }
+    // }
 };
 const changeTab = (val) => {
     console.log(val + 1);
@@ -175,27 +197,7 @@ const changeTab = (val) => {
 const cancel = () => {
     show.value = false;
     commonAudio.value.pause();
-    localStorage.removeItem("eggList");
-    eggList.value = [
-        {
-            id: 1,
-            boom: false,
-            step: 0,
-            hammer: false,
-        },
-        {
-            id: 2,
-            boom: false,
-            step: 0,
-            hammer: false,
-        },
-        {
-            id: 3,
-            boom: false, //是否敲击
-            step: 0, //控制碎蛋
-            hammer: false, //控制锤子
-        },
-    ];
+    init()
     enterGame();
 };
 const getAwardState = async () => {
@@ -207,7 +209,7 @@ const getAwardState = async () => {
             voucherCode.value = res.data.voucherCode;
             show.value = true;
             index.value = 1;
-            localStorage.setItem("eggList", JSON.stringify(eggList.value));
+            init()
         } else {
             showMessage("error", "次数已用完");
         }
@@ -216,17 +218,14 @@ const getAwardState = async () => {
 
 onMounted(() => {
     enterGame();
-    if (localStorage.getItem("eggList")) {
-        eggList.value = JSON.parse(localStorage.getItem("eggList"));
-    }
 });
 </script>
 <style lang='scss' scoped>
 .egg-main { position: absolute; top: 186px; left: 50%; transform: translateX(-50%); width: 100%; }
-.break-bottom { width: 300px; height: auto; transform: translateY(-17.2rem); }
-.break-top { width: 300px; height: auto; transform: translateY(-1.2rem) scale(1.5); }
+.break-bottom { width: 360px; height: auto; transform: translateY(-20.7rem); }
+.break-top { width: 360px; height: auto; transform: translateY(-1.2rem) scale(1.5); }
 .break-top9 { transform: translateY(-9.2rem) scale(1.5); }
-::v-deep .van-popup { background: url($basic_static + "award-bg.png"); background-size: 100% 90%; background-repeat: no-repeat; width: 100%; min-height: 450px; }
+::v-deep .van-popup { background: url($basic_static + "image/award-bg.png"); background-size: 100% 90%; background-repeat: no-repeat; width: 100%; min-height: 450px; }
 .close-img { position: absolute; width: 24px; height: 24px; bottom: 0; z-index: 2003; left: 50%; transform: translateX(-50%); }
 ::v-deep .van-dialog__header { display: none; }
 
@@ -252,8 +251,8 @@ onMounted(() => {
   .col1 { border-radius: 50%; overflow: hidden; }
   .col1 img { width: 50%; height: auto; }
 }
-.egg-top { width: 340px; height: auto; object-fit: contain; transform: translateY(0.2rem); }
-.egg-bottom { width: 160px; height: auto; transform: translateY(-0.6rem); z-index: -1; }
+.egg-top { width: 420px; height: auto; object-fit: contain; transform: translateY(0.1rem)  }
+.egg-bottom { width: 210px; height: auto; transform: translateY(-2rem); z-index: -1; }
 :deep(.el-carousel__mask) { display: none; }
 :deep(.el-carousel__arrow) { display: none; }
 :deep(.el-carousel__indicators) {

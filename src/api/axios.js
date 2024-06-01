@@ -3,7 +3,7 @@ import {ElMessage} from 'element-plus'
 
 const URL = 'https://portal-k8s-dev.kiwiar.com/crm'
 
-const basic_static='../';//静态资源
+const basic_static='https://website-cdn.kiwiar.com/kiwi-games/2024/0603-yanghe/golden_eggs/';//静态资源
 
 const RequestEnums = {
     TIMEOUT: 20000,
