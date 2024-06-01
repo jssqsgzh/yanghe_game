@@ -24,7 +24,7 @@
             <div class="num-box">
                 <p style="color: #fff; opacity: 1; z-index: 111"> 抽奖机会：{{ num }}次 </p>
             </div>
-            <el-carousel :interval="2000" type="card" style="margin-top: 40px" @change="changeTab" >
+            <el-carousel :interval="2000" type="card" style="margin-top: 30px" @change="changeTab" >
                 <el-carousel-item v-for="item in eggList" :key="item.id">
                     <div class="flex_column_center egg-box">
                         <div class="break" v-if="item.boom">
@@ -43,12 +43,12 @@
                     </div>
                 </el-carousel-item>
             </el-carousel>
-            <el-carousel :interval="111111500" type="card" style="transform: translateY(-5.6rem)" >
+            <el-carousel :interval="111111500" type="card" style="transform: translateY(-6.6rem)" >
                 <el-carousel-item v-for="item in 3" :key="item">
                     <div class="flex_column_center egg-box">
                         <img :src="basic_static + 'image/dizuo_01.png'" v-if="item == 1" alt="" class="egg-bottom" />
-                        <img :src="basic_static + 'image/dizuo_02.png'" v-if="item == 2" alt="" class="egg-bottom" style="transform: translateY(-3.8rem)" />
-                        <img :src="basic_static + 'image/dizuo_03.png'" v-if="item == 3" alt="" class="egg-bottom" style="transform: translateY(-4.8rem);width:240px" />
+                        <img :src="basic_static + 'image/dizuo_02.png'" v-if="item == 2" alt="" class="egg-bottom" style="transform: translateY(-4.3rem)" />
+                        <img :src="basic_static + 'image/dizuo_03.png'" v-if="item == 3" alt="" class="egg-bottom" style="transform: translateY(-6.1rem);width:240px" />
                     </div>
                 </el-carousel-item>
             </el-carousel>
@@ -251,8 +251,8 @@ onMounted(() => {
   .col1 { border-radius: 50%; overflow: hidden; }
   .col1 img { width: 50%; height: auto; }
 }
-.egg-top { width: 420px; height: auto; object-fit: contain; transform: translateY(0.1rem)  }
-.egg-bottom { width: 210px; height: auto; transform: translateY(-2rem); z-index: -1; }
+.egg-top { width: 350px; height: auto; object-fit: contain; transform: translateY(-0.2rem)  }
+.egg-bottom { width: 180px; height: auto; transform: translateY(-1rem); z-index: -1; }
 :deep(.el-carousel__mask) { display: none; }
 :deep(.el-carousel__arrow) { display: none; }
 :deep(.el-carousel__indicators) {
@@ -276,4 +276,9 @@ onMounted(() => {
 .award-code { font-size: 14px; margin-top: 0; color: #1e1c1c; padding-bottom: 120px; }
 .no-count-box { position: absolute; top: 280px; left: 50%; transform: translateX(-50%); color: #fff; text-align: center; }
 .num-box { background: rgba(255, 255, 255, 0.36); border-radius: 36px; font-size: 16px; padding: 4px 6px; display: inline-block; color: #fff; font-weight: 600; position: absolute; left: 50%; transform: translateX(-50%); }
+// :deep(el-carousel__item.is-active) .egg-top{width:420px!important;}
+</style>
+<style>
+.el-carousel__item.is-active .egg-top{width:430px!important;transform: translateY(1.2rem)!important}
+.el-carousel__item.is-active .egg-bottom { width: 210px; height: auto; transform: translateY(0.3rem); z-index: -1; }
 </style>
