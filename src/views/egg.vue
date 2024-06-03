@@ -14,7 +14,11 @@
                     <p>{{ voucherCode }}</p>
                 </div>
                 <div v-else class="flex_column_center award-code">
-                    <Vue3NextQrcode :text="code_url" size="130" :whiteMargin="false" />
+                    <!-- <Vue3NextQrcode :text="code_url" size="130" :whiteMargin="false" /> -->
+                    <img v-if="awardCode == 'game_0603_win2' && browser == 'wechat'" class="qrcode-img" :src="basic_static + 'image/yanghe_wechat_12.8.png'" alt="" />
+                    <img v-else-if="awardCode == 'game_0603_win2' && browser == 'alipay'" class="qrcode-img" :src="basic_static + 'image/yanghe_alipay_12.8.png'" alt="" />
+                    <img v-else-if="awardCode == 'game_0603_win3' && browser == 'wechat'" class="qrcode-img" :src="basic_static + 'image/yanghe_wechat_18.8.png'" alt="" />
+                    <img v-else-if="awardCode == 'game_0603_win3' && browser == 'alipay'" class="qrcode-img" :src="basic_static + 'image/yanghe_alipay_18.8.png'" alt="" />
                     <p>{{ browser == "wechat" ? "微信" : "支付宝" }}扫码或长按识别领取</p>
                 </div>
             </div>
@@ -85,7 +89,7 @@
     import { reactive, ref, onBeforeMount, onMounted } from "vue";
     import confetti from "canvas-confetti";
     import { award, enter } from "@/api/base";
-    import { Vue3NextQrcode } from "vue3-next-qrcode";
+    // import { Vue3NextQrcode } from "vue3-next-qrcode";
     import { useRouter, useRoute } from "vue-router";
     import { showMessage } from "@/assets/utils";
     import { storeToRefs } from "pinia";
@@ -94,7 +98,7 @@
     const { domain_static, basic_static } = storeToRefs(store);
     const router = useRouter();
     const route = useRoute();
-    const show = ref(false);
+    const show = ref(true);
     let step = ref(0);
     let index = ref(1);
     let awardCode = ref("");
@@ -126,7 +130,6 @@
     var animationEnd = Date.now() + duration;
     var skew = 1;
     let eggTop = ref();
-    const code_url = ref("http://www.baidu.com");
     var num = ref(null);
     const userId = localStorage.getItem("userId");
     
@@ -298,6 +301,7 @@
     .no-count-box { position: absolute; top: 280px; left: 50%; transform: translateX(-50%); color: #fff; text-align: center; }
     .num-box { background: rgba(255, 255, 255, 0.36); border-radius: 36px; font-size: 16px; padding: 4px 6px; display: inline-block; color: #fff; font-weight: 600; position: absolute; left: 50%; transform: translateX(-50%); }
     // :deep(el-carousel__item.is-active) .egg-top{width:420px!important;}
+    .qrcode-img{width: 70%; margin: 20px 0;max-width: 300px;height: auto;min-width: 150px;}
 </style>
 <style>
     .el-carousel__item.is-active .egg-top { width: 430px !important; transform: translateY(1.2rem) !important; }
