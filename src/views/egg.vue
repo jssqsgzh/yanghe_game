@@ -22,10 +22,10 @@
         </van-dialog>
         <div class="egg-main">
             <div class="num-box">
-                <p style="color: #fff; opacity: 1; z-index: 111"> 抽奖机会：{{ num }}次 </p>
+                <p style="color: #fff; opacity: 1; z-index: 111"> 抽奖机会：{{ num ? num : 0 }}次 </p>
             </div>
             <el-carousel :interval="2000" type="card" style="margin-top: 30px" @change="changeTab" >
-                <el-carousel-item v-for="item in eggList" :key="item.id">
+                <el-carousel-item v-for="(item,indexs) in eggList" :key="item.id">
                     <div class="flex_column_center egg-box">
                         <div class="break" v-if="item.boom">
                             <img :src="basic_static + 'image/egg-broken1.png'" alt="" class="break-top" v-show="item.step == 1" />
@@ -35,7 +35,7 @@
                             <img :src="basic_static + 'image/egg-broken5.png'" alt="" class="break-top" v-show="item.step == 5" />
                             <img :src="basic_static + 'image/egg-broken6.png'" alt="" class="break-top" v-show="item.step == 6" />
                             <img :src="basic_static + 'image/egg-broken7.png'" alt="" class="break-top" v-show="item.step == 7" />
-                            <img :src="basic_static + 'image/egg-broken8.png'" alt="" class="break-top" v-show="step == 8" />
+                            <img :src="basic_static + 'image/egg-broken8.png'" alt="" class="break-top" v-show="item.step == 8" />
                             <img :src="basic_static + 'image/egg-broken-half2.png'" alt="" class="break-bottom" v-show="item.boom" :style="item.step > 8 ? 'transform:translateY(2rem)' : ''" id="break-bottom" />
                         </div>
                         <img :src="basic_static + 'image/dan.png'" alt="" ref="eggTop" :class="['egg-top', index == 1 ? '' : 'eddAnmiation']" v-show="!item.boom" @click.stop="boom(item)" />
@@ -136,8 +136,10 @@ const enterGame = async () => {
     let res = await enter({ userId: userId });
     if (res) {
         num.value = res.data;
+        localStorage.setItem('game_num',res.data)
         if (res.data == 0) {
-            // num.value = 0
+            num.value = 0
+            localStorage.setItem('game_num',res.data)
             showMessage("error", "您次数用完啦！");
         } else {
             // commonAudio.value=new Audio(require('../assets/audio/knock.mp3'));
@@ -151,12 +153,12 @@ const boom = (item) => {
      
     //     index.value = 2;
     // } else {
-        let audio = new Audio(require("../assets/audio/win.mp3"));
+        let audio = new Audio("https://s3.cn-northwest-1.amazonaws.com.cn/walmart-files/cny_game/yh_h5_game/win.mp3");
         audio.onload = () => {
             audio.play();
             audio.pause();
         };
-        commonAudio.value = new Audio(require("../assets/audio/knock.mp3"));
+        commonAudio.value = new Audio("https://s3.cn-northwest-1.amazonaws.com.cn/walmart-files/cny_game/yh_h5_game/knock.mp3");
         commonAudio.value.onload = () => {
             commonAudio.value.play();
             commonAudio.value.pause();
@@ -198,7 +200,9 @@ const cancel = () => {
     show.value = false;
     commonAudio.value.pause();
     init()
-    enterGame();
+    num.value--
+    localStorage.setItem('game_num',num.value)
+    // enterGame();
 };
 const getAwardState = async () => {
     let res = await award({ userId: userId });
@@ -212,12 +216,19 @@ const getAwardState = async () => {
             init()
         } else {
             showMessage("error", "次数已用完");
+            num.value = 0
+            localStorage.setItem('game_num',0)
         }
     }
 };
 
 onMounted(() => {
-    enterGame();
+    if(!localStorage.getItem('game_num')){
+        enterGame();
+    }else{
+        num.value = localStorage.getItem('game_num')
+    }
+    
 });
 </script>
 <style lang='scss' scoped>
@@ -281,4 +292,10 @@ onMounted(() => {
 <style>
 .el-carousel__item.is-active .egg-top{width:430px!important;transform: translateY(1.2rem)!important}
 .el-carousel__item.is-active .egg-bottom { width: 210px; height: auto; transform: translateY(0.3rem); z-index: -1; }
+/* .el-carousel__item:nth-child(0) .break-bottom{ transform: translateY(-23rem);}
+.el-carousel__item:nth-child(1) .break-bottom{ transform: translateY(-20rem);}
+.el-carousel__item:nth-child(2) .break-bottom{ transform: translateY(-20rem);}
+.el-carousel__item:nth-child(0) .broken-egg1{ transform: translateY(-0.5rem);}
+.el-carousel__item:nth-child(1) .broken-egg1{ transform: translateY(3rem);}
+.el-carousel__item:nth-child(2) .broken-egg1{ transform: translateY(-0.5rem);} */
 </style>
