@@ -9,7 +9,7 @@
                 <img v-else-if="awardCode == 'game_0603_win2'" class="award-img" :src="basic_static + 'image/award1.png'" alt="" />
                 <img v-else-if="awardCode == 'game_0603_win3'" class="award-img" :src="basic_static + 'image/award2.png'" alt="" />
                 <p class="line"></p>
-                <div class="flex_column_center" v-if="awardCode == 'game_0603_win1'">
+                <div class="flex_column_center tip-box" v-if="awardCode == 'game_0603_win1'">
                     <p class="tip">凭中奖页面在洋河导购员处领取</p>
                     <p>{{ voucherCode }}</p>
                 </div>
@@ -51,20 +51,8 @@
                                 : item.step>8 && tab == indexs?'transform:translateY(3.2rem)':item.step<=8 && tab == indexs?'transform:translateY(-19.6rem)':''
                             " id="break-bottom" />
                     </div>
-                    <img
-                        :src="basic_static + 'image/dan.png'"
-                        alt=""
-                        ref="eggTop"
-                        :class="['egg-top', index == 1 ? '' : 'eddAnmiation']"
-                        v-show="!item.boom"
-                        @click.stop="boom(item)"
-                    />
-                    <img
-                        v-if="item.hammer"
-                        :src="basic_static + 'image/hammer.png'"
-                        alt=""
-                        class="hammer"
-                    />
+                    <img :src="basic_static + 'image/dan.png'" alt="" ref="eggTop" :class="['egg-top', index == 1 ? '' : 'eddAnmiation']" v-show="!item.boom" @click.stop="boom(item)" />
+                    <img v-if="item.hammer" :src="basic_static + 'image/hammer.png'" alt="" class="hammer" />
                     </div>
                 </el-carousel-item>
             </el-carousel>
@@ -134,6 +122,7 @@
     const userId = localStorage.getItem("userId");
     
     const browser = localStorage.getItem("browser");
+    var flag = ref(0)
   
     const init = () => {
         eggList.value = [
@@ -175,10 +164,10 @@
     };
   
     const boom = (item) => {
-        // if (index.value == 1) {
-    
-        //     index.value = 2;
-        // } else {
+        if(flag.value == 1){
+            return
+        }
+        flag.value = 1
         let audio = new Audio( "https://s3.cn-northwest-1.amazonaws.com.cn/walmart-files/cny_game/yh_h5_game/win.mp3" );
         audio.onload = () => {
             audio.play();
@@ -231,7 +220,7 @@
         // enterGame();
     };
     const getAwardState = async () => {
-        let res = await award({ userId: userId });
+        let res = await award({ userId: userId, deviceId: browser});
         if (res) {
             if (res.data.awardCode) {
                 awardCode.value = res.data.awardCode;
@@ -245,6 +234,7 @@
                 localStorage.setItem("game_num", 0);
             }
         }
+        flag.value = 0
     };
   
     onMounted(() => {
@@ -260,7 +250,7 @@
     .break-bottom { width: 360px; height: auto; transform: translateY((-20.7rem)); }
     .break-top { width: 360px; height: auto; transform: translateY(-1.2rem) scale(1.5); }
     .break-top9 { transform: translateY(-9.2rem) scale(1.5); }
-    ::v-deep .van-popup { background: url($basic_static + "image/award-bg.png"); background-size: 100% 90%; background-repeat: no-repeat; width: 100%; min-height: 450px; }
+    ::v-deep .van-popup { background: url($basic_static + "image/award-bg.png"); background-size: 100% 90%; background-repeat: no-repeat; width: 70%; min-height: 200px; }
     .close-img { position: absolute; width: 24px; height: 24px; bottom: 0; z-index: 2003; left: 50%; transform: translateX(-50%); }
     ::v-deep .van-dialog__header { display: none; }
     .container { perspective: 400px; perspective-origin: center top; width: 200px; height: 200px; background-color: pink; margin: 50px auto; }
@@ -288,21 +278,23 @@
     .egg-box { position: relative; }
     .hammer { width: 3rem; height: 3rem; position: absolute; top: 0rem; right: 1.2rem; animation: hit 300ms 1; }
     .eddAnmiation { animation: shake 700ms 2; }
-    .award-content { color: #e61f19; padding: 20px;
-        h2 { font-size: 28px; font-weight: bold; margin-top: 20px; }
-        h3 { font-size: 24px; font-weight: bold; margin-top: 10px; }
-        .desc { font-size: 18px; margin-top: 10px; }
-        .tip { font-size: 20px; margin-top: 20px; }
-        .paper-img { width: 50%; margin: 20px 0; }
-        .award-img { width: 80%; margin: 20px 0; }
-        .line { width: 80%; border-top: 1px solid #e61f19; }
+    .award-content { color: #e61f19;
+        h2 { font-size: 20px; font-weight: bold; margin-top: 20px; }
+        h3 { font-size: 16px; font-weight: bold; margin-top: 10px; }
+        .desc { font-size: 14px; margin-top: 10px; }
+        .tip-box{padding: 0px 0 130px;
+            .tip { font-size: 14px; margin-top: 20px;}
+        }
+        .paper-img { width: 60%; margin: 10px 0; }
+        .award-img { width: 50%; margin: 10px 0; }
+        .line { width: 60%; border-top: 1px solid #e61f19; }
     }
-    .award-code { font-size: 14px; margin-top: 0; color: #1e1c1c; padding-bottom: 145px; }
+    .award-code { font-size: 14px; margin-top: 0; color: #1e1c1c; padding-bottom: 100px; }
     .no-count-box { position: absolute; top: 280px; left: 50%; transform: translateX(-50%); color: #fff; text-align: center; }
     .num-box { background: rgba(255, 255, 255, 0.36); border-radius: 36px; font-size: 16px; padding: 4px 6px; display: inline-block; color: #fff; font-weight: 600; position: absolute; left: 50%; transform: translateX(-50%); }
     // :deep(el-carousel__item.is-active) .egg-top{width:420px!important;}
-    .qrcode-img{width: 70%; margin: 20px 0;max-width: 300px;height: auto;min-width: 150px;}
-    :deep(.van-dialog){top: 50%;}
+    .qrcode-img{width: 60%; margin: 4px 0;max-width: 150px;height: auto;min-width: 80px;}
+    :deep(.van-dialog){top: 55%;}
 </style>
 <style>
     .el-carousel__item.is-active .egg-top { width: 430px !important; transform: translateY(1.2rem) !important; }
