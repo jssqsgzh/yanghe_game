@@ -98,7 +98,7 @@
     const { domain_static, basic_static } = storeToRefs(store);
     const router = useRouter();
     const route = useRoute();
-    const show = ref(true);
+    const show = ref(false);
     let step = ref(0);
     let index = ref(1);
     let awardCode = ref("");
