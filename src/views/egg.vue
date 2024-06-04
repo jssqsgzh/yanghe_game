@@ -238,11 +238,12 @@
     };
   
     onMounted(() => {
-        if (!localStorage.getItem("game_num")) {
-            enterGame();
-        } else {
-            num.value = localStorage.getItem("game_num");
-        }
+        enterGame()
+        // if (!localStorage.getItem("game_num")) {
+        //     enterGame();
+        // } else {
+        //     num.value = localStorage.getItem("game_num");
+        // }
     });
 </script>
 <style lang='scss' scoped>
