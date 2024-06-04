@@ -237,7 +237,7 @@
         flag.value = 0
     };
   
-    onMounted(() => {
+    onMounted(() => { 
         enterGame()
         // if (!localStorage.getItem("game_num")) {
         //     enterGame();
@@ -290,12 +290,12 @@
         .award-img { width: 50%; margin: 10px 0; }
         .line { width: 60%; border-top: 1px solid #e61f19; }
     }
-    .award-code { font-size: 14px; margin-top: 0; color: #1e1c1c; padding-bottom: 100px; }
+    .award-code { font-size: 14px; margin-top: 0; color: #1e1c1c; padding-bottom: 115px; }
     .no-count-box { position: absolute; top: 280px; left: 50%; transform: translateX(-50%); color: #fff; text-align: center; }
     .num-box { background: rgba(255, 255, 255, 0.36); border-radius: 36px; font-size: 16px; padding: 4px 6px; display: inline-block; color: #fff; font-weight: 600; position: absolute; left: 50%; transform: translateX(-50%); }
     // :deep(el-carousel__item.is-active) .egg-top{width:420px!important;}
-    .qrcode-img{width: 60%; margin: 4px 0;max-width: 150px;height: auto;min-width: 80px;}
-    :deep(.van-dialog){top: 55%;}
+    .qrcode-img{width: 70%; margin: 4px 0;max-width: 180px;height: auto;min-width: 120px;}
+    :deep(.van-dialog){top: 58%;}
 </style>
 <style>
     .el-carousel__item.is-active .egg-top { width: 430px !important; transform: translateY(1.2rem) !important; }
